@@ -14,7 +14,7 @@ type student struct{
 }
 
 func main(){
-	var student student
+	var student student //declaration of structure
 
 	student.name = "Raj"
 	student.class = "10"
