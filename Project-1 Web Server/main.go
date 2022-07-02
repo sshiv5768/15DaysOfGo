@@ -1,19 +1,18 @@
 package main
 
-import(
-	"fmt"
-	"log"
+import (
 	"net/http"
+	"log"
 )
 
-func main(){
-	// Creating a new file server
-	fileServer := http.FileServer(http.Dir("./static"))
-	http.Handle("/", fileServer)
+func Hello(rw http.ResponseWriter, r *http.Request){
+	rw.Header().Set("Content-Type", "text/html")
+	rw.Write([]byte("<h1 style='color: blue'>HellWorld</h1>"))
+	
+}
 
-	// Creating a listenerAndServe at port 8080
-	fmt.Println("Listening on port 8080")
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		log.Fatal(err)
-	}
+func main(){
+	http.HandleFunc("/hello", Hello)
+
+	log.Fatal(http.ListenAndServe(":5000", nil))
 }
